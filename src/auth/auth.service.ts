@@ -10,7 +10,7 @@ import { Repository } from 'typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { User } from './entities/user.entity';
 import { UNIQUE_VIOLATION } from 'pg-error-constants';
-import * as bcrypt from 'bcrypt';
+import * as bcryptjs from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 
@@ -27,7 +27,7 @@ export class AuthService {
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<User> {
     const { username, password } = authCredentialsDto;
 
-    const salt = await bcrypt.genSalt();
+    const salt = await bcryptjs.genSalt();
 
     try {
       const user = this.userRepository.create({
@@ -68,6 +68,6 @@ export class AuthService {
   }
 
   private async hashPassword(password: string, salt: string): Promise<string> {
-    return bcrypt.hash(password, salt);
+    return bcryptjs.hash(password, salt);
   }
 }
