@@ -80,7 +80,7 @@ export class TasksController {
       `User "${user.username}" updating a task status. Status: ${status}`,
     );
 
-    return this.taskService.update(id, status, user);
+    return this.taskService.update(id, status);
   }
 
   @Delete(':id')

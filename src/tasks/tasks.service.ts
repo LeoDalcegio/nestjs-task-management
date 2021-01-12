@@ -69,7 +69,7 @@ export class TasksService {
     }
   }
 
-  async update(id: number, status: TaskStatus, user: User) {
+  async update(id: number, status: TaskStatus) {
     const existingTask = await this.taskRepository.preload({
       id: id,
       status: status,
